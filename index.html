@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base target="_self">
+    <title>Artisanat Sucré | Pâtisserie Trompe-l'œil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preline/preline@2.0.0/dist/preline.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-gray-900 hover:text-rose-500 transition-colors" onclick="navigate(event, 'home')">
+                        <span class="text-rose-500">Artisanat</span> Sucré
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#" class="text-gray-900 hover:text-rose-500 px-3 py-2 text-sm font-medium transition-colors relative group" onclick="navigate(event, 'home')">
+                            Accueil
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#" class="text-gray-900 hover:text-rose-500 px-3 py-2 text-sm font-medium transition-colors relative group" onclick="navigate(event, 'products')">
+                            Nos Créations
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#" class="text-gray-900 hover:text-rose-500 px-3 py-2 text-sm font-medium transition-colors relative group" onclick="navigate(event, 'about')">
+                            Notre Histoire
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#" class="text-gray-900 hover:text-rose-500 px-3 py-2 text-sm font-medium transition-colors relative group" onclick="navigate(event, 'contact')">
+                            Contact
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-rose-500 focus:outline-none" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg rounded-b-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 rounded-md" onclick="navigate(event, 'home')">Accueil</a>
+                <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 rounded-md" onclick="navigate(event, 'products')">Nos Créations</a>
+                <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 rounded-md" onclick="navigate(event, 'about')">Notre Histoire</a>
+                <a href="#" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-rose-500 hover:bg-gray-50 rounded-md" onclick="navigate(event, 'contact')">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 hero-gradient opacity-90"></div>
+        <div class="absolute inset-0 bg-[url('./assets/facade.png')] bg-cover bg-center parallax"></div>
+
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 glow-text">
+                <span class="text-stroke">L'Art</span> du <span class="text-yellow-300">Trompe-l'œil</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white mb-10 max-w-2xl mx-auto">
+                Découvrez nos pâtisseries uniques qui défient les sens. Des fruits si réalistes qu'il faudra y goûter pour y croire.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="px-8 py-3 bg-white text-rose-600 font-bold rounded-full hover:bg-rose-100 transition-all transform hover:scale-105 glow-box">
+                    Nos Spécialités
+                </button>
+                <button class="px-8 py-3 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-rose-600 transition-all transform hover:scale-105">
+                    Réserver
+                </button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator">
+            <a href="#products" onclick="navigate(event, 'products')" class="text-white text-4xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+        
+        <!-- Floating fruits -->
+        <div class="absolute top-20 left-10 w-16 h-16 bg-[url('https://cdn-icons-png.flaticon.com/512/2909/2909546.png')] bg-contain bg-no-repeat opacity-70 floating" style="animation-delay: 0s;"></div>
+        <div class="absolute top-1/3 right-20 w-20 h-20 bg-[url('https://cdn-icons-png.flaticon.com/512/2909/2909776.png')] bg-contain bg-no-repeat opacity-80 floating" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-24 h-24 bg-[url('https://cdn-icons-png.flaticon.com/512/2909/2909763.png')] bg-contain bg-no-repeat opacity-90 floating" style="animation-delay: 2s;"></div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20 bg-gradient-to-b from-white to-rose-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Nos <span class="text-rose-500">Créations</span> Uniques</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Chaque pièce est une œuvre d'art comestible, minutieusement façonnée à la main par nos artisans pâtissiers.
+                </p>
+            </div>
+            
+            <!-- 3D Fruit Viewer -->
+            <div class="mb-20">
+                <div id="fruit-3d-container" class="rounded-xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 flex items-center justify-center bg-gray-100">
+                        <p class="text-gray-500">Chargement du modèle 3D...</p>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <p class="text-gray-600">Faites glisser pour tourner • Molette pour zoomer</p>
+                </div>
+            </div>
+            
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex items-center gap-16">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl hover-rotate transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Pâtissier en action" class="w-full h-auto">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6 text-white">
+                            <p class="text-sm">Maître Pâtissier Jean Dupont</p>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center shadow-xl z-10">
+                        <span class="text-5xl">🍓</span>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Notre <span class="text-rose-500">Histoire</span></h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Fondée en 2010, Artisanat Sucré est née de la passion d'un pâtissier pour l'art et la gastronomie. Notre mission : créer des desserts qui émerveillent autant les yeux que les papilles.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Spécialisés dans le trompe-l'œil, nous repoussons sans cesse les limites de la pâtisserie pour vous offrir des expériences uniques. Chaque création est le fruit de nombreuses heures de travail et d'une recherche constante de perfection.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-rose-50 p-6 rounded-xl">
+                            <div class="text-rose-500 text-3xl mb-3">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-900 mb-2">Meilleur Ouvrier de France</h3>
+                            <p class="text-gray-600">2018 & 2022</p>
+                        </div>
+                        <div class="bg-yellow-50 p-6 rounded-xl">
+                            <div class="text-yellow-500 text-3xl mb-3">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-900 mb-2">5 Étoiles</h3>
+                            <p class="text-gray-600">Guide Michelin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Ils ont <span class="text-rose-500">adoré</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ce que nos clients disent de nos créations
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "J'ai commandé une tarte aux fraises pour l'anniversaire de ma mère. Quand je l'ai vue, j'ai cru à une vraie fraise posée sur la table ! Le goût était à la hauteur de l'apparence."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sophie Martin" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Sophie Martin</h4>
+                            <p class="text-gray-500 text-sm">Paris</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "Le gâteau mangue-passion que j'ai commandé pour mon mariage était une véritable œuvre d'art. Nos invités n'en croyaient pas leurs yeux !"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thomas Leroy" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Thomas Leroy</h4>
+                            <p class="text-gray-500 text-sm">Lyon</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "J'ai offert les macarons framboise à mes collègues. Ils étaient si réalistes que certains ont hésité à les manger ! Un régal pour les yeux et le palais."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Émilie Dubois" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Émilie Dubois</h4>
+                            <p class="text-gray-500 text-sm">Marseille</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-rose-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex items-center gap-16">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h2 class="text-4xl font-bold mb-6">Nous <span class="text-yellow-300">contacter</span></h2>
+                    <p class="text-xl mb-8">
+                        Vous souhaitez commander une création unique ou simplement en savoir plus sur notre atelier ? Contactez-nous !
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4 text-yellow-300">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">Notre adresse</h3>
+                                <p>123 Rue de la Pâtisserie, 75001 Paris</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4 text-yellow-300">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">Téléphone</h3>
+                                <p>+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-2xl mr-4 text-yellow-300">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-1">Email</h3>
+                                <p>contact@artisanatsucre.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 bg-white rounded-xl shadow-2xl p-8 text-gray-800">
+                    <h3 class="text-2xl font-bold mb-6">Envoyez-nous un message</h3>
+                    <form>
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Votre nom</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Votre email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Votre message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-rose-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-rose-700 transition-colors transform hover:scale-105">
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Artisanat Sucré</h3>
+                    <p class="text-gray-400">
+                        Pâtisserie d'exception spécialisée dans le trompe-l'œil et les créations fruitées.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" onclick="navigate(event, 'home')">Accueil</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" onclick="navigate(event, 'products')">Nos Créations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" onclick="navigate(event, 'about')">Notre Histoire</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors" onclick="navigate(event, 'contact')">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Horaires</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Lundi - Vendredi: 8h - 19h</li>
+                        <li>Samedi: 8h - 20h</li>
+                        <li>Dimanche: 9h - 18h</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Réseaux sociaux</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-rose-600 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-rose-600 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-rose-600 transition-colors">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-rose-600 transition-colors">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Artisanat Sucré. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js" defer></script>
+</body>
+</html>
