@@ -55,7 +55,7 @@ Le site vitrine d’une boulangerie-pâtisserie française spécialisée dans le
 
 1. **Cloner le projet**
     ```bash
-    git clone https://github.com/tonpseudo/artisanat-sucre.git
+    git clone https://github.com/KevinP93/Artisanat_Sucre.git
     cd artisanat-sucre
     ```
 
